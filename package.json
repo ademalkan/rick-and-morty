@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "test": "yarn run cypress open",
+    "test:run": "yarn run cypress run",
+    "lint": "next lint",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@types/node": "20.6.3",
@@ -23,6 +26,7 @@
     "typescript": "5.2.2"
   },
   "devDependencies": {
-    "cypress": "^13.2.0"
+    "cypress": "^13.2.0",
+    "husky": "^8.0.0"
   }
 }
