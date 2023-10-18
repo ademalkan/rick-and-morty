@@ -1,13 +1,15 @@
-import { METHOD_TYPES } from "@/constants";
-import { fetchRequest } from "@/utils";
+/* The FetchService class is responsible for making API requests to fetch characters. */
+import { FetchCharacters, METHOD, fetchRequest } from "@/utils";
 import { getCharacters } from "./queries";
 
 export default class FetchService {
   private baseUrl: string = process.env.BASE_URL as string;
   constructor() {}
 
+  /* The `genericFetchRequest` method is a private method in the `FetchService` class. It is responsible
+ for making a generic API request using the `fetchRequest` utility function. */
   private genericFetchRequest = async (
-    method: METHOD_TYPES,
+    method: METHOD,
     query: unknown
   ): Promise<unknown> => {
     const request = await fetchRequest({
@@ -19,7 +21,9 @@ export default class FetchService {
     return request;
   };
 
-  public fetchCharacters = async (): Promise<any> => {
+  /* The `fetchCharacters` method is a public method in the `FetchService` class. It is responsible for
+ making an API request to fetch characters. */
+  public fetchCharacters = async (): Promise<FetchCharacters> => {
     const fetchCharacters = (await this.genericFetchRequest(
       "POST",
       getCharacters
