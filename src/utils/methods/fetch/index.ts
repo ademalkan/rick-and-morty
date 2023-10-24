@@ -1,8 +1,8 @@
-import { METHOD_TYPES } from "@/constants";
+import { METHOD } from "@/utils/types";
 
 interface FetchRequestI {
   baseUrl: string;
-  method: METHOD_TYPES;
+  method: METHOD;
   query: unknown;
 }
 

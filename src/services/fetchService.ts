@@ -1,6 +1,6 @@
 /* The FetchService class is responsible for making API requests to fetch characters. */
-import { FetchCharacters, METHOD, fetchRequest } from "@/utils";
-import { getCharacters } from "./queries";
+import { TypeFetchCharacters, METHOD, fetchRequest } from "@/utils";
+import { getByCharacter, getCharacters } from "./queries";
 
 export default class FetchService {
   private baseUrl: string = process.env.BASE_URL as string;
@@ -23,11 +23,22 @@ export default class FetchService {
 
   /* The `fetchCharacters` method is a public method in the `FetchService` class. It is responsible for
  making an API request to fetch characters. */
-  public fetchCharacters = async (): Promise<FetchCharacters> => {
+  public fetchCharacters = async (): Promise<TypeFetchCharacters> => {
     const fetchCharacters = (await this.genericFetchRequest(
       "POST",
       getCharacters
     )) as any;
     return fetchCharacters;
+  };
+  /* The `fetchByCharacter` method is a public method in the `FetchService` class. It is responsible for
+ making an API request to fetch a character by its ID. */
+  public fetchByCharacter = async (
+    id: string | number
+  ): Promise<TypeFetchCharacters> => {
+    const fetchByCharacter = (await this.genericFetchRequest(
+      "POST",
+      getByCharacter(id)
+    )) as any;
+    return fetchByCharacter;
   };
 }

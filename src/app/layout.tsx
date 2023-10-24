@@ -15,7 +15,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`bg-[#e4a788]`}>
-        <Providers>{children}</Providers>
+        <main className="w-10/12 m-auto py-5 ">
+          <Providers>{children}</Providers>
+        </main>
       </body>
     </html>
   );
