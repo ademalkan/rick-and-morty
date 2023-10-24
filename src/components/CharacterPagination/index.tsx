@@ -10,7 +10,7 @@ type TypePagination = {
 
 const CharacterPagination = ({ total, initialPage }: TypePagination) => {
   const router = useRouter();
-  const paginationChangeHandler = (page: any) => {
+  const paginationChangeHandler = (page: number) => {
     router.push(`?page=${page}`);
   };
   return (
