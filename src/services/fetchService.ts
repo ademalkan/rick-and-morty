@@ -23,10 +23,10 @@ export default class FetchService {
 
   /* The `fetchCharacters` method is a public method in the `FetchService` class. It is responsible for
  making an API request to fetch characters. */
-  public fetchCharacters = async (): Promise<TypeFetchCharacters> => {
+  public fetchCharacters = async (page:string): Promise<TypeFetchCharacters> => {
     const fetchCharacters = (await this.genericFetchRequest(
       "POST",
-      getCharacters
+      getCharacters(page)
     )) as any;
     return fetchCharacters;
   };
