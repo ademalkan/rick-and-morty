@@ -1,6 +1,9 @@
 export type TypeFetchCharacters = {
   characters: TypeCharacters;
 };
+export type TypeFetchCharacter = {
+  character: TypeCharactersResult;
+};
 export type TypeCharacters = {
   info: TypeInfo;
   results: TypeCharactersResult[];
