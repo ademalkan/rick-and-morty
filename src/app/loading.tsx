@@ -7,9 +7,13 @@ export default function Loading() {
   const dummyArray = helper.createDummyArray(16);
   return (
     <>
-      {dummyArray.map((_, index) => (
-        <CharacterCardSkeleton key={index} />
-      ))}
+      <main className="md:w-10/12 m-auto py-5 min-h-screen">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-3">
+          {dummyArray.map((_, index) => (
+            <CharacterCardSkeleton key={index} />
+          ))}
+        </div>
+      </main>
     </>
   );
 }

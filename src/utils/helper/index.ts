@@ -3,7 +3,7 @@ import { eCharacterStatus } from "../enum";
 export default class Helper {
   /* The `convertToSlug` function is used to convert a string into a slug format. A slug is a
  URL-friendly version of a string, typically used in URLs or for creating unique identifiers. */
-  convertToSlug = (str: string) =>
+  convertToSlug = (str: string): string =>
     str
       .toLowerCase()
       .trim()

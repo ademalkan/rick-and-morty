@@ -1,6 +1,6 @@
 import { EpisodeCard } from "@/components";
 import FetchService from "@/services/fetchService";
-import { eCharacterStatus } from "@/utils";
+import { TypeCharactersResult, eCharacterStatus } from "@/utils";
 import { Card, CardBody, Image } from "@nextui-org/react";
 import classNames from "classnames";
 import React from "react";
@@ -16,8 +16,18 @@ export default async function CharacterPage({
 }: TypeCharacterPage) {
   const fetchService = new FetchService();
   const { character } = await fetchService.fetchByCharacter(searchParams.id);
+
+  const episodeCardList = (character: TypeCharactersResult) =>
+    character?.episode.map((episode) => (
+      <EpisodeCard
+        key={episode.id}
+        episode={episode.episode}
+        name={episode.name}
+      />
+    ));
+
   return (
-    <main className="min-h-screen flex justify-between gap-6 relative">
+    <div className="min-h-screen flex justify-between gap-6 relative">
       <div className="max-w-xs h-fit sticky top-4">
         <Image
           isZoomed
@@ -26,8 +36,10 @@ export default async function CharacterPage({
           alt={character?.name}
           src={character?.image}
         />
-        <div className="flex justify-between items-center px-2 py-1">
-          <h1 className="text-lg text-[#44281d]">{character?.name}</h1>
+        <div className="flex justify-between items-center px-2 py-3 shadow-lg rounded-b-lg bg-blur">
+          <h1 className="text-lg font-semibold text-white ">
+            {character?.name}
+          </h1>
           <h3
             className={classNames(
               { "text-tiny  text-white px-2 py-1 rounded-lg": true },
@@ -40,15 +52,14 @@ export default async function CharacterPage({
           </h3>
         </div>
       </div>
-      <div className="grid grid-cols-4 gap-2">
-        {character?.episode.map((episode) => (
-          <EpisodeCard
-            key={episode.id}
-            episode={episode.episode}
-            name={episode.name}
-          />
-        ))}
+      <div
+        className={classNames({
+          "grid grid-cols-4 gap-2": character?.episode.length >= 4,
+          "flex gap-2 w-full": character?.episode.length < 4,
+        })}
+      >
+        {episodeCardList(character)}
       </div>
-    </main>
+    </div>
   );
 }
