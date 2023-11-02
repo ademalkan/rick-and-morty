@@ -6,6 +6,7 @@ import { Suspense } from "react";
 
 type TypeHome = {
   page: string;
+  q: string;
 };
 
 export default async function Home({
@@ -13,8 +14,14 @@ export default async function Home({
 }: {
   searchParams: TypeHome;
 }) {
+  const page = searchParams?.page || "1";
+  const q = searchParams?.q || "";
   const fetchService = new FetchService();
-  const result = await fetchService.fetchCharacters(searchParams?.page || "1");
+  const query = {
+    page,
+    q,
+  };
+  const result = await fetchService.fetchCharacters(query);
 
   return (
     <div className="min-h-screen">
@@ -29,7 +36,7 @@ export default async function Home({
         </Suspense>
       </div>
       <CharacterPagination
-        initialPage={Number(searchParams.page) || 1}
+        initialPage={Number(page)}
         total={result?.characters?.info?.pages || 0}
       />
     </div>

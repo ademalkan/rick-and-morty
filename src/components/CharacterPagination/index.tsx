@@ -1,6 +1,6 @@
 "use client";
 import { Pagination } from "@nextui-org/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 
 type TypePagination = {
@@ -10,8 +10,10 @@ type TypePagination = {
 
 const CharacterPagination = ({ total, initialPage }: TypePagination) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const q = searchParams.get("q");
   const paginationChangeHandler = (page: number) => {
-    router.push(`?page=${page}`);
+    router.push(`?page=${page}${q ? `&q=${q}` : null}`);
   };
   return (
     <div className="flex justify-center items-center w-full mt-5">

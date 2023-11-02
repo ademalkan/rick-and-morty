@@ -1,5 +1,5 @@
 "use client";
-import { Input, input } from "@nextui-org/react";
+import { Input } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -9,7 +9,7 @@ const SearchInput = () => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const inputValue = event.target.value;
-    inputValue.length ? router.push(`?q=${inputValue}`) : router.push("/");
+    inputValue.length ? router.replace(`?q=${inputValue}`) : router.push("/");
   };
 
   return (

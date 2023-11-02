@@ -1,3 +1,8 @@
+export type FetchCharactersParams = {
+  page: string;
+  q: string;
+};
+
 export type TypeFetchCharacters = {
   characters: TypeCharacters;
 };
