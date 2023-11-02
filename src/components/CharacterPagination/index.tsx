@@ -13,7 +13,7 @@ const CharacterPagination = ({ total, initialPage }: TypePagination) => {
   const searchParams = useSearchParams();
   const q = searchParams.get("q");
   const paginationChangeHandler = (page: number) => {
-    router.push(`?page=${page}${q ? `&q=${q}` : null}`);
+    router.push(`?page=${page}${q ? `&q=${q}` : ''}`);
   };
   return (
     <div className="flex justify-center items-center w-full mt-5">
