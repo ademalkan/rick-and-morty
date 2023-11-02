@@ -1,4 +1,4 @@
-import { CharacterCard, CharacterPagination } from "@/components";
+import { CharacterCard, CharacterPagination, SearchInput } from "@/components";
 import FetchService from "@/services/fetchService";
 import { TypeCharactersResult } from "@/utils";
 import CharacterLoading from "./loading";
@@ -17,17 +17,20 @@ export default async function Home({
   const result = await fetchService.fetchCharacters(searchParams?.page || "1");
 
   return (
-    <div className=" min-h-screen">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-3">
+    <div className="min-h-screen">
+      <SearchInput />
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-3 mt-8">
         <Suspense fallback={<CharacterLoading />}>
-          {result.characters.results?.map((character: TypeCharactersResult) => (
-            <CharacterCard key={character.id} character={character} />
-          ))}
+          {result?.characters?.results?.map(
+            (character: TypeCharactersResult) => (
+              <CharacterCard key={character?.id} character={character} />
+            )
+          )}
         </Suspense>
       </div>
       <CharacterPagination
         initialPage={Number(searchParams.page) || 1}
-        total={result.characters.info.pages}
+        total={result?.characters?.info?.pages || 0}
       />
     </div>
   );
